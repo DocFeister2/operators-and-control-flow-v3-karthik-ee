@@ -24,11 +24,15 @@ int main() {
   const double price_bag_apples = 3.0; // dollars for a bag of eight apples
 
   // DECLARE OR INITIALIZE OTHER VARIABLES FOR FUTURE USAGE
-  string product_type; // product name (e.g. 'banana', 'watermelon', or 'apple')
+  string product_type;
+  string extra_product_type; // product name (e.g. 'banana', 'watermelon', or 'apple')
   string unit_type; // unit name (e.g. 'single', 'bag', or 'bunch')
+  string extra_unit_type;
   int quantity; // number of units of produce which will be purchased
   double total_cost = 0.0; // this variable will hold the cost of your total purchase
   double item_cost = 0.0; // this variable will hold the averaged cost per item (e.g. the cost of a single banana)
+  double offer_total_cost = 0.0;
+  double final_cost = 0.0;
   string accept_sale; // whether the user accepted the sale offer
 
   // PROMPT USER TO INPUT DESIRED TYPE AND QUANTITY OF PRODUCT
@@ -62,23 +66,82 @@ int main() {
     cout << "Invalid unit type entered! For bananas, the unit type must be 'single' or 'bunch'." << endl;
     return 1; // abort
   }
+
+   if ((product_type == "apple") && !(unit_type == "single" || unit_type == "bag")) {
+    cout << "Invalid unit type entered! For apples, the unit type must be 'single' or 'bag'." << endl;
+    return 1; // abort
+  }
   //...
 
   // TODO: COMPUTE THE COST OF THIS PURCHASE
   if ((product_type == "banana") && (unit_type == "single")) {
     total_cost = quantity * (price_banana / 100.); // total cost in dollars
-    //...
+    item_cost = price_banana / 100.; // cost of a single banana
+
+  } else if ((product_type == "apple") && (unit_type == "single")) {
+    total_cost = quantity * (price_apple / 100.);
+    item_cost = price_apple / 100.;
   }
-  if (product_type == "banana") && (unit_type == "bunch")) {
-    total_cost = quantity *   //...
+
+  if ((product_type == "banana") && (unit_type == "bunch")) {
+    total_cost = quantity * (price_bunch_bananas);  //...
+    item_cost = price_bunch_bananas / 7.; // 7 bananas per bunch
     //...
+  } else if ((product_type == "apple") && (unit_type == "bag")) {
+    total_cost = quantity * (price_bag_apples);
+    item_cost = price_bag_apples / 8.; // 8 apples per bag
   }
-  //...
-  //...
+
+  if (product_type == "watermelon") {
+    total_cost = quantity * (price_watermelon / 100.); // convert cents to dollars
+    item_cost = price_watermelon / 100.;
+  }
+
+ 
+
 
 
   // TODO: APPLY THE OPTIONAL DISCOUNT TO FINAL TOTAL COST
-  //...
+  if (accept_sale == "y") {
+    cout << "Enter name of product as a string (e.g. 'apple', 'banana', "
+          "'watermelon'): ";
+    cin >> extra_product_type;
+    cout << "Enter the unit of product, as a string (e.g. 'bunch', 'bag', 'single'): ";
+    cin >> extra_unit_type;
+    cout << "Enter the number of units, as a positive integer: ";
+    cin >> quantity;
+
+    if ((extra_product_type == "banana") && (extra_unit_type == "single")) {
+    offer_total_cost = quantity * (price_banana / 100.); // total cost in dollars
+
+  } else if ((extra_product_type == "apple") && (extra_unit_type == "single")) {
+    offer_total_cost = quantity * (price_apple / 100.);
+  }
+
+  if ((extra_product_type == "banana") && (extra_unit_type == "bunch")) {
+    offer_total_cost = quantity * (price_bunch_bananas);  //...
+    //...
+  } else if ((extra_product_type == "apple") && (extra_unit_type == "bag")) {
+    offer_total_cost = quantity * (price_bag_apples);
+  }
+
+  if (extra_product_type == "watermelon") {
+    offer_total_cost = quantity * (price_watermelon / 100.); // convert cents to dollars
+  }
+
+ 
+      final_cost = (offer_total_cost + total_cost) - ((offer_total_cost + total_cost) * (1/10.));
+      cout << "Here is your final cost: " << final_cost << endl; 
+
+
+
+
+
+    //...
+  } else if (accept_sale == "n") {
+    cout << "Here is your final cost: $" << total_cost << endl;
+
+}
 
       
   // DO NOT EDIT BELOW THIS LINE!
