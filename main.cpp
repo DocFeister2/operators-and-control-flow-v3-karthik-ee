@@ -62,6 +62,11 @@ int main() {
     return 1; // abort
   }
 
+  if (cin.fail()) {
+    cout << "Invalid quantity entered! Quantity must be a number. Aborting." << endl;
+    return 1; // abort
+}
+
   if ((product_type == "banana") && !(unit_type == "single" || unit_type == "bunch")) {
     cout << "Invalid unit type entered! For bananas, the unit type must be 'single' or 'bunch'." << endl;
     return 1; // abort
